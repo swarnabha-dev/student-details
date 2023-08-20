@@ -1,0 +1,97 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+struct student
+{
+    char name[10];
+    int reg_no;
+    int marks;
+    void display();
+    void read();
+};
+
+void mysort(student arr[], int size);
+void sortByName(student arr[], int size);
+
+int main()
+{
+    student s[3];
+    
+    for (int i = 0; i < 3; i++)
+    {
+        s[i].read();
+    }
+    
+    cout << "Before sorting:" << endl;
+    for (int i = 0; i < 3; i++)
+    {
+        s[i].display();
+    }
+    
+    mysort(s, 3);
+    
+    cout << "After sorting by marks:" << endl;
+    for (int i = 0; i < 3; i++)
+    {
+        s[i].display();
+    }
+    
+    sortByName(s, 3);
+    
+    cout << "After sorting by name:" << endl;
+    for (int i = 0; i < 3; i++)
+    {
+        s[i].display();
+    }
+}
+
+void student::read()
+{
+    cout << "Enter name: ";
+    cin >> name;
+    cout << "Enter registration number: ";
+    cin >> reg_no;
+    cout << "Enter marks: ";
+    cin >> marks;
+}
+
+void student::display()
+{
+    cout << "Name" << "\t" << "Registration No." << "\t" << "Marks" << endl;
+    cout << name << "\t" << reg_no << "\t" << marks << endl;
+}
+
+void mysort(student arr[], int size)
+{
+    for (int i = 0; i < size - 1; i++)
+    {
+        for (int j = 0; j < size - i - 1; j++)
+        {
+            if (arr[j].marks > arr[j + 1].marks)
+            {
+                // Swap arr[j] and arr[j+1]
+                student temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void sortByName(student arr[], int size)
+{
+    for (int i = 0; i < size - 1; i++)
+    {
+        for (int j = 0; j < size - i - 1; j++)
+        {
+            if (strcmp(arr[j].name, arr[j + 1].name) > 0)
+            {
+                // Swap arr[j] and arr[j+1]
+                student temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
